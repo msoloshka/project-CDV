@@ -52,7 +52,7 @@ export const cars = [
     name: "A4",
     brand: "Audi",
     cost: 40000,
-    img: "car1.jpg",
+    img: "car7.jpg",
     model: 2024,
   },
   {
@@ -60,7 +60,7 @@ export const cars = [
     name: "Q5",
     brand: "Audi",
     cost: 50000,
-    img: "car2.jpg",
+    img: "car8.jpg",
     model: 2024,
   },
   {
@@ -68,7 +68,7 @@ export const cars = [
     name: "R8",
     brand: "Audi",
     cost: 140000,
-    img: "car3.jpg",
+    img: "car9.jpg",
     model: 2024,
   },
   {
@@ -76,7 +76,7 @@ export const cars = [
     name: "A6",
     brand: "Audi",
     cost: 60000,
-    img: "car4.jpg",
+    img: "car10.jpg",
     model: 2024,
   },
   {
@@ -84,7 +84,7 @@ export const cars = [
     name: "Q7",
     brand: "Audi",
     cost: 70000,
-    img: "car5.jpg",
+    img: "car11.jpg",
     model: 2024,
   },
   {
@@ -92,7 +92,7 @@ export const cars = [
     name: "e-tron GT",
     brand: "Audi",
     cost: 110000,
-    img: "car6.jpg",
+    img: "car12.jpg",
     model: 2024,
   },
   {
@@ -100,7 +100,7 @@ export const cars = [
     name: "Q8",
     brand: "Audi",
     cost: 80000,
-    img: "car1.jpg",
+    img: "car13.jpg",
     model: 2024,
   },
   {
@@ -108,7 +108,7 @@ export const cars = [
     name: "RS 6 Avant",
     brand: "Audi",
     cost: 120000,
-    img: "car2.jpg",
+    img: "car14.jpg",
     model: 2024,
   },
 ];
