@@ -26,26 +26,30 @@ window.addEventListener("scroll", () => {
 
 function getCarsList(cars) {
   let divParent = document.getElementById("carsList");
+  try {
+    cars.forEach((car) => {
+      let div = document.createElement("DIV");
+      div.classList.add("box");
 
-  cars.forEach((car) => {
-    let div = document.createElement("DIV");
-    div.classList.add("box");
+      let img = document.createElement("IMG");
+      img.src = `./assets/img/${car.img}`;
 
-    let img = document.createElement("IMG");
-    img.src = `./assets/img/${car.img}`;
+      let h2 = document.createElement("h2");
+      h2.innerText = `${car.cost} zł.`;
+      h2.classList.add("priceInfo");
 
-    let h2 = document.createElement("h2");
-    h2.innerText = `${car.cost} zł.`;
+      let button = document.createElement("button");
+      button.innerText = `${car.brand} ${car.name}`;
+      button.setAttribute("data-id", car.id);
 
-    let button = document.createElement("button");
-    button.innerText = `${car.brand} ${car.name}`;
-    button.setAttribute("data-id", car.id);
-
-    div.appendChild(img);
-    div.appendChild(h2);
-    div.appendChild(button);
-    divParent.appendChild(div);
-  });
+      div.appendChild(img);
+      div.appendChild(h2);
+      div.appendChild(button);
+      divParent.appendChild(div);
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 getCarsList(cars);
@@ -59,7 +63,7 @@ function getDataFromLocalStorage() {
   }
 }
 
-function choosenCar(cars) {
+function selectedCar(cars) {
   const $btnCars = document.getElementById("carsList");
 
   $btnCars.addEventListener("click", (e) => {
@@ -75,15 +79,109 @@ function choosenCar(cars) {
       $summary.classList.toggle("hidden");
 
       let getData = getDataFromLocalStorage();
-      console.log(getData);
       let $brand = document.getElementById("brand");
       $brand.innerText = getData.brand;
       let $model = document.getElementById("model");
       $model.innerText = `${getData.name} (rocznik ${getData.model})`;
 
       let $price = document.getElementById("price");
-      $price.innerText = `${getData.cost} zł`
+      $price.innerText = `${getData.cost} zł`;
+      window.scrollTo({
+        top: 300,
+        behavior: "smooth",
+      });
     }
   });
 }
-choosenCar(cars);
+
+selectedCar(cars);
+
+function validateRadioButtons() {
+  try {
+    const radioButton = document.getElementsByName("payment");
+    let selectValue;
+
+    for (const option of radioButton) {
+      if (option.checked) {
+        selectValue = option.value;
+        break;
+      }
+    }
+    return selectValue;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function validateNameAndSurname(nameInput) {
+  const input = nameInput.trim().split(" ").length >= 2;
+  if (input) {
+    return true;
+  } else {
+    const $novalidate = document.getElementById("noValidate");
+    let span = $novalidate.children[0];
+    span.textContent = "Uzupełnij imię i nazwisko";
+    $novalidate.classList.remove("hidden");
+    return false;
+  }
+}
+
+function validate() {
+  const $person = document.getElementById("personNameAndSurname");
+  const $place = document.getElementById("place");
+  const $date = document.getElementById("date");
+  let radioButtonValue = validateRadioButtons();
+  let validatePersonName = validateNameAndSurname($person.value);
+  console.log(validatePersonName);
+  if (validatePersonName) {
+    if ($place.value && $date.value && radioButtonValue) {
+      const personsData = {
+        name: $person.value,
+        place: $place.value,
+        date: $date.value,
+        payment: radioButtonValue,
+      };
+      localStorage.setItem("person", JSON.stringify(personsData));
+      return true;
+    } else {
+      const $novalidate = document.getElementById("noValidate");
+      let span = $novalidate.children[0];
+      span.textContent = "Uzupełnij brakujące pola by przejść dalej";
+      $novalidate.classList.remove("hidden");
+      return false;
+    }
+  }
+}
+
+function acceptBuingCar() {
+  const $button = document.getElementById("accept");
+  $button.addEventListener("click", () => {
+    if (validate()) {
+      window.location.href = "summaryPage.html";
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } else {
+      console.log("Uzupeij brakujące pola");
+    }
+  });
+}
+acceptBuingCar();
+
+function cancelBuy() {
+  const $btnCars = document.getElementById("carsList");
+  const $button = document.getElementById("cancel");
+  $button.addEventListener("click", () => {
+    const $summary = document.getElementById("summary");
+    $btnCars.classList.toggle("hidden");
+    $summary.classList.toggle("hidden");
+    const $novalidate = document.getElementById("noValidate");
+    $novalidate.classList.add("hidden");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+}
+cancelBuy();

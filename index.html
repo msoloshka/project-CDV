@@ -68,26 +68,58 @@
       id="summary"
       class="container summary hidden card text-white bg-secondary mb-3"
     >
-      <h2 class="text-center" id="brand"></h2>
+      <h2 class="text-center mt-3" id="brand"></h2>
       <h4>Model: <span id="model"></span></h4>
       <h5>Cena <span id="price"></span></h5>
-      <div class="row">
+      <div class="row mt-4 p-3">
         <form class="col-md-5">
-          <ul class="list-group list-group-flush  mt-3 mb-4">
-            <li class="list-group-item">
-              <input type="text" placeholder="Imie i Nazwisko" />
+          <h4>Uzupełnij dane do zakupu</h4>
+          <ul class="list-group list-group-flush mt-3 mb-4">
+            <li
+              class="list-group-item list-group-item-action list-group-item-light"
+            >
+              <input
+                id="personNameAndSurname"
+                type="text"
+                placeholder="Imie i Nazwisko"
+              />
             </li>
-            <li class="list-group-item">
-              <input type="text" placeholder="Miejsce odbioru" />
+            <li
+              class="list-group-item list-group-item-action list-group-item-light"
+            >
+              <input id="place" type="text" placeholder="Miejsce odbioru" />
             </li>
-            <li class="list-group-item">
-              <input type="date" placeholder="Data dostawy" />
+            <li
+              class="list-group-item list-group-item-action list-group-item-light"
+            >
+              <input id="date" type="date" placeholder="Data dostawy" />
             </li>
           </ul>
         </form>
-        <div class="col-md-7">
-
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+          <fieldset>
+            <legend>Płatność:</legend>
+            <div class="radio-list">
+              <input type="radio" id="leasing" name="payment" value="Leasing" />
+              <label for="leasing">Leasing</label><br />
+              <input type="radio" id="cash" name="payment" value="Gotówka" />
+              <label for="cash">Gotówka</label><br />
+              <input type="radio" id="card" name="payment" value="Przelew" />
+              <label for="card">Przelew</label>
+            </div>
+          </fieldset>
         </div>
+        <div
+          class="col-md-3 d-flex flex-column justify-content-end align-items-end"
+        >
+          <button id="accept" class="btn mb-5 btn-success">Kupuję</button>
+          <button id="cancel" class="btn mb-5">Anuluj</button>
+        </div>
+      </div>
+      <div id="noValidate" class="hidden text-center">
+        <span class="bg-warning text-muted p-2"
+          ></span
+        >
       </div>
     </section>
     <section class="about container" id="about">

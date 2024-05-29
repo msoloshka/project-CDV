@@ -155,7 +155,8 @@ header.shadow #search-icon {
   font-weight: 400;
 }
 .btn:hover {
-  background: #fd052f;
+  background: #19ac67a4;
+  border: 1px solid whitesmoke;
 }
 .heading {
   text-align: center;
@@ -207,9 +208,9 @@ header.shadow #search-icon {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1rem;
-  background: var(--bg-color);
+  background: #ffffff8c;
   padding: 8px;
   border-radius: 0.5rem;
 }
@@ -488,6 +489,66 @@ header.shadow #search-icon {
   display: none;
 }
 
-ul>li>input{
-    width: 250px;
+ul > li > input {
+  width: 100%;
+  border: 0;
+  background-color: transparent;
+  padding: 5px 15px;
+  border-bottom: 1px solid white;
+  outline: auto 0px;
 }
+
+ul > li > input:hover {
+  background-color: whitesmoke;
+  border-bottom: 3px solid darkred;
+}
+ul > li {
+  height: 60px;
+}
+
+div > fieldset {
+  border: 1px solid whitesmoke;
+  padding: 15px;
+  width: 200px;
+  height: 150px;
+}
+
+#accept {
+  width: 150px;
+}
+
+form {
+  max-height: 50vh;
+}
+
+#summary {
+  height: 80vh;
+}
+
+#buyInfoCar {
+  margin-top: 40px;
+}
+
+.carImg {
+  width: 450px;
+  height: auto;
+  border: 2px solid #1ef706;
+  border-radius: 0.375rem;
+}
+
+#carPhoto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carInfoList{
+  display: flex;
+  align-items: center;
+}
+
+#cancel{
+  width: 150px;
+  background-color: rgba(144, 29, 29, 0.594);
+}
+
