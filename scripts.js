@@ -32,7 +32,7 @@ function getCarsList(cars) {
       div.classList.add("box");
 
       let img = document.createElement("IMG");
-      img.src = `./assets/img/${car.img}`;
+      img.src = `./img/${car.img}`;
 
       let h2 = document.createElement("h2");
       h2.innerText = `${car.cost} zł.`;

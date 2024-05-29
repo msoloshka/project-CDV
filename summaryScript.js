@@ -11,7 +11,7 @@ function getBuyCar() {
 
   const carPhoto = document.getElementById("carPhoto");
   let $img = document.createElement("IMG");
-  $img.src = `./assets/img/${car.img}`;
+  $img.src = `./img/${car.img}`;
   $img.classList.add("carImg");
   carPhoto.appendChild($img);
 }
