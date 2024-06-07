@@ -1,44 +1,50 @@
 import { cars } from "./cars.js";
 
-let search = document.querySelector(".search-box");
+const $search = document.querySelector(".search-box");
+const $menu = document.querySelector(".navbar");
+const $header = document.querySelector("header");
 
-document.querySelector("#search-icon").onclick = () => {
-  search.classList.toggle("active");
-  menu.classList.remove("active");
-};
+function searchCarButton() {
+  const searchIcon = document.getElementById("search-icon");
+  searchIcon.addEventListener("click", () => {
+    $search.classList.toggle("active");
+    $menu.classList.remove("active");
+  });
+}
 
-let menu = document.querySelector(".navbar");
-
-document.querySelector("#menu-icon").onclick = () => {
-  menu.classList.toggle("active");
-  search.classList.remove("active");
-};
+function menuNavigateButton() {
+  const menuIcon = document.getElementById("menu-icon");
+  menuIcon.addEventListener("click", () => {
+    $menu.classList.toggle("active");
+    $search.classList.remove("active");
+  });
+}
 // SCROLL
 window.onscroll = () => {
-  menu.classList.remove("active");
-  search.classList.remove("active");
+  $menu.classList.remove("active");
+  $search.classList.remove("active");
 };
 
-let header = document.querySelector("header");
+
 window.addEventListener("scroll", () => {
-  header.classList.toggle("shadow", window.scrollY > 0);
+  $header.classList.toggle("shadow", window.scrollY > 0);
 });
 
 function getCarsList(cars) {
-  let divParent = document.getElementById("carsList");
+  const divParent = document.getElementById("carsList");
   try {
     cars.forEach((car) => {
-      let div = document.createElement("DIV");
+      const div = document.createElement("DIV");
       div.classList.add("box");
 
-      let img = document.createElement("IMG");
+      const img = document.createElement("IMG");
       img.src = `./img/${car.img}`;
 
-      let h2 = document.createElement("h2");
+      const h2 = document.createElement("h2");
       h2.innerText = `${car.cost} zł.`;
       h2.classList.add("priceInfo");
 
-      let button = document.createElement("button");
+      const button = document.createElement("button");
       button.innerText = `${car.brand} ${car.name}`;
       button.setAttribute("data-id", car.id);
 
@@ -52,11 +58,9 @@ function getCarsList(cars) {
   }
 }
 
-getCarsList(cars);
-
 function getDataFromLocalStorage() {
   try {
-    let data = JSON.parse(localStorage.getItem("car"));
+    const data = JSON.parse(localStorage.getItem("car"));
     return data;
   } catch (error) {
     console.error(error);
@@ -68,23 +72,23 @@ function selectedCar(cars) {
 
   $btnCars.addEventListener("click", (e) => {
     if (e.target.tagName === "BUTTON") {
-      let button = e.target;
-      let carId = button.dataset.id;
+      const button = e.target;
+      const carId = button.dataset.id;
 
-      let car = cars.find((obj) => obj.id === Number(carId));
+      const car = cars.find((obj) => obj.id === Number(carId));
 
       localStorage.setItem("car", JSON.stringify(car));
       $btnCars.classList.toggle("hidden");
       const $summary = document.getElementById("summary");
       $summary.classList.toggle("hidden");
 
-      let getData = getDataFromLocalStorage();
-      let $brand = document.getElementById("brand");
+      const getData = getDataFromLocalStorage();
+      const $brand = document.getElementById("brand");
       $brand.innerText = getData.brand;
-      let $model = document.getElementById("model");
+      const $model = document.getElementById("model");
       $model.innerText = `${getData.name} (rocznik ${getData.model})`;
 
-      let $price = document.getElementById("price");
+      const $price = document.getElementById("price");
       $price.innerText = `${getData.cost} zł`;
       window.scrollTo({
         top: 300,
@@ -94,9 +98,7 @@ function selectedCar(cars) {
   });
 }
 
-selectedCar(cars);
-
-function validateRadioButtons() {
+function validateRadioButtonsInForms() {
   try {
     const radioButton = document.getElementsByName("payment");
     let selectValue;
@@ -119,7 +121,7 @@ function validateNameAndSurname(nameInput) {
     return true;
   } else {
     const $novalidate = document.getElementById("noValidate");
-    let span = $novalidate.children[0];
+    const span = $novalidate.children[0];
     span.textContent = "Uzupełnij imię i nazwisko";
     $novalidate.classList.remove("hidden");
     return false;
@@ -130,9 +132,8 @@ function validate() {
   const $person = document.getElementById("personNameAndSurname");
   const $place = document.getElementById("place");
   const $date = document.getElementById("date");
-  let radioButtonValue = validateRadioButtons();
-  let validatePersonName = validateNameAndSurname($person.value);
-  console.log(validatePersonName);
+  const radioButtonValue = validateRadioButtonsInForms();
+  const validatePersonName = validateNameAndSurname($person.value);
   if (validatePersonName) {
     if ($place.value && $date.value && radioButtonValue) {
       const personsData = {
@@ -145,7 +146,7 @@ function validate() {
       return true;
     } else {
       const $novalidate = document.getElementById("noValidate");
-      let span = $novalidate.children[0];
+      const span = $novalidate.children[0];
       span.textContent = "Uzupełnij brakujące pola by przejść dalej";
       $novalidate.classList.remove("hidden");
       return false;
@@ -153,7 +154,7 @@ function validate() {
   }
 }
 
-function acceptBuingCar() {
+function createBuyCarButton() {
   const $button = document.getElementById("accept");
   $button.addEventListener("click", () => {
     if (validate()) {
@@ -162,12 +163,9 @@ function acceptBuingCar() {
         top: 0,
         behavior: "smooth",
       });
-    } else {
-      console.log("Uzupeij brakujące pola");
     }
   });
 }
-acceptBuingCar();
 
 function cancelBuy() {
   const $btnCars = document.getElementById("carsList");
@@ -184,4 +182,10 @@ function cancelBuy() {
     });
   });
 }
+
+searchCarButton();
+menuNavigateButton();
+getCarsList(cars);
+selectedCar(cars);
+createBuyCarButton();
 cancelBuy();
